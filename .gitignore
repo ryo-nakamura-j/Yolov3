@@ -1,0 +1,5 @@
+OD-weapon-detection/
+weapon-detection-16/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
