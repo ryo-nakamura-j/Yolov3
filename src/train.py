@@ -1,8 +1,12 @@
 """
 Main file for training Yolo model on Pascal VOC and COCO dataset
 """
+import sys
+import os
 
+sys.path.append(os.path.abspath("./configs"))
 import config
+
 import torch
 import torch.optim as optim
 from torch.utils.data import DataLoader
@@ -28,6 +32,14 @@ from datetime import datetime
 warnings.filterwarnings("ignore")
 
 torch.backends.cudnn.benchmark = True
+
+# Get the root directory of the project
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+# Paths to specific files
+CHECKPOINTS_DIR = os.path.join(PROJECT_ROOT, "checkpoints")
+NOTEBOOKS_DIR = os.path.join(PROJECT_ROOT, "notebooks")
+
+checkpoint_file = os.path.join(CHECKPOINTS_DIR, config.LOAD_MODEL_FILE)
 
 
 def train_fn(train_loader, model, optimizer, loss_fn, scaler, scaled_anchors):
@@ -87,7 +99,7 @@ def main():
 
     if config.LOAD_MODEL:
         load_checkpoint(
-            config.LOAD_MODEL_FILE, model, optimizer, config.LEARNING_RATE
+            checkpoint_file, model, optimizer, config.LEARNING_RATE
         )
 
     scaled_anchors = (
@@ -108,7 +120,7 @@ def main():
 
         if epoch > 0 and epoch % 1 == 0:
             if config.SAVE_MODEL:
-              save_checkpoint(model, optimizer, filename=f"checkpoint_C1_OD_wd_epoch_{epoch}_{current_date}.pth.tar")
+              save_checkpoint(model, optimizer, filename=os.path.join(CHECKPOINTS_DIR, f"checkpoint_C1_OD_wd_epoch_{epoch}_{current_date}.pth.tar"))
               
             # check_class_accuracy(model, test_loader, threshold=config.CONF_THRESHOLD)
             # pred_boxes, true_boxes = get_evaluation_bboxes(
