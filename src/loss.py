@@ -1,3 +1,4 @@
+# %load ./src/loss.py
 """
 Implementation of Yolo Loss Function similar to the one in Yolov3 paper,
 the difference from what I can tell is I use CrossEntropy for the classes
@@ -77,4 +78,4 @@ class YoloLoss(nn.Module):
             + self.lambda_class * class_loss
         )
 
-        return loss
+        return loss, (box_loss, object_loss, no_object_loss, class_loss)

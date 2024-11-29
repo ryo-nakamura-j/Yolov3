@@ -1,3 +1,5 @@
+
+# %load ./configs/config.py
 import albumentations as A
 import cv2
 import torch
@@ -22,7 +24,7 @@ S = [IMAGE_SIZE // 32, IMAGE_SIZE // 16, IMAGE_SIZE // 8]
 PIN_MEMORY = True
 LOAD_MODEL = True
 SAVE_MODEL = True
-LOAD_MODEL_FILE = "checkpoint_epoch_6_2024-11-27.pth.tar"
+LOAD_MODEL_FILE = "checkpoint_C1_OD_wd_epoch_29_2024-11-29.pth.tar"
 SAVE_MODEL_FILE = "checkpoint_C28.pth.tar"
 IMG_DIR = ""
 LABEL_DIR = ""

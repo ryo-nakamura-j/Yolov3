@@ -1,3 +1,5 @@
+
+# %load ./src/dataset.py
 """
 Creates a Pytorch dataset to load the Pascal VOC & MS COCO datasets
 """
@@ -16,6 +18,14 @@ from utils import (
     non_max_suppression as nms,
     plot_image
 )
+
+# Get the root directory of the project
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+# Paths to specific files
+DATASET_DIR = os.path.join(PROJECT_ROOT, "OD-WeaponDetection/Pistol detection/")
+NOTEBOOKS_DIR = os.path.join(PROJECT_ROOT, "notebooks")
+
+print(DATASET_DIR)
 
 ImageFile.LOAD_TRUNCATED_IMAGES = True
 
@@ -95,9 +105,9 @@ def test():
 
     transform = config.test_transforms
     dataset = YOLODataset(
-        csv_file='/content/drive/MyDrive/Yolo/OD-weapon-detection/Pistol detection/OD-dataset.csv',
-        img_dir='/content/drive/MyDrive/Yolo/OD-weapon-detection/Pistol detection/Weapons',
-        label_dir='/content/drive/MyDrive/Yolo/OD-weapon-detection/Pistol detection/labels',
+        csv_file=os.path.join(DATASET_DIR,'OD-dataset.csv'),
+        img_dir=os.path.join(DATASET_DIR,'Weapons'),
+        label_dir=os.path.join(DATASET_DIR,'labels'),
         anchors=config.ANCHORS,
         image_size=416,
         S=[13, 26, 52],
