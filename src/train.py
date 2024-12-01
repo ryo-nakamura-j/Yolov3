@@ -7,6 +7,16 @@ import csv
 import sys
 import os
 
+# Get the current file's directory (i.e., 'src' directory)
+current_dir = os.path.dirname(os.path.abspath(__file__))
+
+# Get the parent directory (i.e., the project root 'Yolo' directory)
+parent_dir = os.path.abspath(os.path.join(current_dir, '..'))
+
+# Add the parent directory to sys.path
+sys.path.insert(0, parent_dir)
+
+
 sys.path.append(os.path.abspath("./configs"))
 import config
 
@@ -39,13 +49,15 @@ torch.backends.cudnn.benchmark = True
 # Get the root directory of the project
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 # Paths to specific files
-CHECKPOINTS_DIR = os.path.join(PROJECT_ROOT, "checkpoints")
+# WEIGHTS_DIR= os.path.join("/kaggle/input/yolov3_nov_30/pytorch/default/1/")
+WEIGHTS_DIR= os.path.join(PROJECT_ROOT, 'checkpoints')
+CHECKPOINTS_DIR = os.path.join(PROJECT_ROOT, 'checkpoints')
 NOTEBOOKS_DIR = os.path.join(PROJECT_ROOT, "notebooks")
 # Paths to specific files
 DATASET_DIR = os.path.join(PROJECT_ROOT, "OD-WeaponDetection/Pistol detection/")
 NOTEBOOKS_DIR = os.path.join(PROJECT_ROOT, "notebooks")
 
-checkpoint_file = os.path.join(CHECKPOINTS_DIR, config.LOAD_MODEL_FILE)
+checkpoint_file = os.path.join(WEIGHTS_DIR, config.LOAD_MODEL_FILE)
 
 
 def train_fn(train_loader, model, optimizer, loss_fn, scaler, scaled_anchors):
@@ -182,9 +194,9 @@ def main():
         #print("On Train loader:")
         #check_class_accuracy(model, train_loader, threshold=config.CONF_THRESHOLD)
 
-        if epoch > 0 and epoch % 2 == 0:
+        if epoch > 0 and epoch % 10 == 0:
             if config.SAVE_MODEL:
-              save_checkpoint(model, optimizer, filename=os.path.join(CHECKPOINTS_DIR, f"checkpoint_C1_OD_wd_epoch_3{epoch}_{current_date}.pth.tar"))
+              save_checkpoint(model, optimizer, filename=os.path.join(CHECKPOINTS_DIR, f"checkpoint_C1_OD_wd_epoch_{epoch}_{current_date}.pth.tar"))
               
             # check_class_accuracy(model, test_loader, threshold=config.CONF_THRESHOLD)
             # pred_boxes, true_boxes = get_evaluation_bboxes(

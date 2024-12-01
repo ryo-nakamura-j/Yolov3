@@ -1,4 +1,6 @@
-import config
+
+# %load ./src/utils.py
+from configs import config
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 import numpy as np
