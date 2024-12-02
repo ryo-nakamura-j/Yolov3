@@ -49,8 +49,8 @@ torch.backends.cudnn.benchmark = True
 # Get the root directory of the project
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 # Paths to specific files
-# WEIGHTS_DIR= os.path.join("/kaggle/input/yolov3_nov_30/pytorch/default/1/")
-WEIGHTS_DIR= os.path.join(PROJECT_ROOT, 'checkpoints')
+WEIGHTS_DIR= os.path.join("/kaggle/input/yolov3_12_01/pytorch/default/1/")
+# WEIGHTS_DIR= os.path.join(PROJECT_ROOT, 'checkpoints')
 CHECKPOINTS_DIR = os.path.join(PROJECT_ROOT, 'checkpoints')
 NOTEBOOKS_DIR = os.path.join(PROJECT_ROOT, "notebooks")
 # Paths to specific files
