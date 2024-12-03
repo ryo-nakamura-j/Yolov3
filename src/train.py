@@ -49,7 +49,7 @@ torch.backends.cudnn.benchmark = True
 # Get the root directory of the project
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 # Paths to specific files
-WEIGHTS_DIR= os.path.join("/kaggle/input/yolov3_12_01/pytorch/default/1/")
+WEIGHTS_DIR= os.path.join("/kaggle/input/yolov3-2024-12-02/pytorch/default/1")
 # WEIGHTS_DIR= os.path.join(PROJECT_ROOT, 'checkpoints')
 CHECKPOINTS_DIR = os.path.join(PROJECT_ROOT, 'checkpoints')
 NOTEBOOKS_DIR = os.path.join(PROJECT_ROOT, "notebooks")
@@ -194,7 +194,7 @@ def main():
         #print("On Train loader:")
         #check_class_accuracy(model, train_loader, threshold=config.CONF_THRESHOLD)
 
-        if epoch > 0 and epoch % 10 == 0:
+        if epoch > 0 and epoch % 50 == 0:
             if config.SAVE_MODEL:
               save_checkpoint(model, optimizer, filename=os.path.join(CHECKPOINTS_DIR, f"checkpoint_C1_OD_wd_epoch_{epoch}_{current_date}.pth.tar"))
               
